@@ -21,6 +21,7 @@ function inArray(array, elemento) {
 }
 
 // genero i 5 numeri all'inizio del gioco
+
 var numeriGioco = [];
 var numeroCasuale;
 while (numeriGioco.length < 5) {
@@ -33,9 +34,10 @@ alert(numeriGioco);
 
 /* avvio il countdown e chiedo all'utente di inziare a giocare i suoi numeri
 */
+
 var numVincenti = [];
 var numUtenteGiocati = [];
-var numCount = 5;
+var numCount = 30;
 var countDown = setInterval( function() {
   console.log(numCount);
   if (numCount === 0) {
@@ -43,14 +45,19 @@ var countDown = setInterval( function() {
     alert("Adesso prova a inserire i numeri che ti ricordi! Clicca su Ok");
     for ( i=0; i < 5; i++ ) {
       var provaUtente = parseInt(prompt("Prova a inserire un numero!"));
+
+      if(isNaN(provaUtente)) {
+        provaUtente = parseInt(prompt("Deve essere un numero!"));
+      }
+
       if (!inArray(numUtenteGiocati, provaUtente)) {
        numUtenteGiocati.push(provaUtente);
       }
-    //   if (inArray(numeriGioco, provaUtente)) {
-    //    numVincenti.push(provaUtente);
-    // }
+      if (inArray(numeriGioco, provaUtente)) {
+       numVincenti.push(provaUtente);
+    }
   }
-  alert ("I numeri generati erano: " + numeriGioco + " e quelli che hai giocato erano: " +numUtenteGiocati + ". I numeri che hai azzeccato sono: " + numVincenti);
+  alert ("Hai azzeccato: " + numVincenti.length + " numeri! E sono: " + numVincenti);
 }
   numCount = numCount - 1;
 }, 1000);
